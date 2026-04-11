@@ -17,11 +17,12 @@ export class CheckoutPage {
     this.page = page;
 
     this.locators = {
-      cartTotal: this.page.locator('[data-test="cart-total"]'),
-      productPrice: this.page.locator('[data-test="product-price"]'),
-      linePrice: this.page.locator('[data-test="line-price"]'),
-      quantityInput: this.page.locator('[data-test="product-quantity"]'),
-      toast: this.page.locator('text=Product quantity updated'),
+
+      cartTotal: this.page.getByRole('row', { name: /total/i }).locator('td').nth(3),
+      productPrice: this.page.getByRole('row').nth(1).locator('td').nth(2),
+      linePrice: this.page.getByRole('row').nth(1).locator('td').nth(3),
+      quantityInput: this.page.getByRole('spinbutton', { name: /quantity/i }),
+      toast: this.page.getByText(/updated/i),
       body: this.page.locator('body'),
     };
   }
@@ -44,7 +45,7 @@ export class CheckoutPage {
 
   async updateQuantity(quantity: number) {
     await this.locators.quantityInput.fill(String(quantity));
-    await this.locators.body.click();
+    await this.locators.body.click(); // unchanged as per your request
     await this.locators.toast.waitFor();
   }
 

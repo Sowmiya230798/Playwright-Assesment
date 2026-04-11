@@ -17,11 +17,11 @@ export class LoginPage {
 
     this.locators = {
       signInLink: this.page.getByRole('link', { name: 'Sign in' }),
-      email: this.page.locator('[data-test="email"]'),
+      email: this.page.getByRole('textbox', { name: /email/i }),
       password: this.page.locator('[data-test="password"]'),
       loginBtn: this.page.getByRole('button', { name: 'Login' }),
       navMenu: this.page.locator('[data-test="nav-menu"]'),
-      errorMsg: this.page.getByText('Invalid'),
+      errorMsg: this.page.getByText(/invalid/i),
     };
   }
 
