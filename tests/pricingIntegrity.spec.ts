@@ -1,11 +1,11 @@
 import { test, expect } from '@playwright/test';
-import { LoginPage } from '../pages/LoginPage';
-import { HomePage } from '../pages/HomePage';
-import { CheckoutPage } from '../pages/CheckoutPage';
+import { LoginPage } from '../pages/PriceIntegrity/LoginPage';
+import { HomePage } from '../pages/PriceIntegrity/HomePage';
+import { CheckoutPage } from '../pages/PriceIntegrity/CheckoutPage';
 
 import * as dotenv from 'dotenv';
 import * as path from 'path';
-
+ 
 // Load env
 dotenv.config({ path: path.resolve(process.cwd(), '.env.qa') });
 
@@ -19,7 +19,7 @@ test.describe('Pricing Integrity Tests', () => {
     // Login flow
     await loginPage.goToLogin();
     await loginPage.login(process.env.EMAIL!, process.env.PASSWORD!);
-    await loginPage.menubar();
+    await loginPage.waitForLoginSuccess();
   });
 
    test('Add product to cart & Checkout quantity total validation', async ({ page }) => {
@@ -28,22 +28,22 @@ test.describe('Pricing Integrity Tests', () => {
     const checkout = new CheckoutPage(page);
 
 
-    // ✅ Navigate to Home & products
+    // Navigate to Home & products
     await home.validateAndGoToHome();
 
-    // ✅ Select product
+    // Select product
     await home.selectFirstProduct();
 
-    // ✅ Add to cart
+    // Add to cart
     await home.addFirstProductToCart();
 
-    // ✅ Validate toast
+    // Validate toaster
     await home.validateAddToCartToast();
 
-    // ✅ Open cart
+    // Open cart
     await home.openCart();
 
-    // ✅ Validate cart page loaded
+    // Validate cart page loaded
     await expect(page).toHaveURL(/checkout/);
 
     // Wait for checkout page to load properly
