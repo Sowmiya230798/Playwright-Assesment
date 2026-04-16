@@ -1,0 +1,20 @@
+{
+  "user": {
+    "password": "Sowbarnya@0508",
+    "firstname": "Sowbarnya",
+    "lastname": "Muthusamy",
+    "street": "123 Test Street",
+    "city": "Testville",
+    "country": "US",
+    "state": "India",
+    "zip": "12345",
+    "email": "sowbarnya@qaoncloud.com",
+    "phone": "9876543210"
+  },
+  "card": {
+    "number": "4242 4242 4242 4242",
+    "expiry": "12/34",
+    "cvv": "123",
+    "name": "sowbarnya"
+  }
+}
